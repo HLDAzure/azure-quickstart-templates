@@ -370,7 +370,7 @@
           "clusterSpec": {
             "value": "[variables('clusterSpec')]"
           },
-          "tagName": {
+          "applicationName": {
               "value": "[parameters('applicationName')]"
           }
         }
@@ -420,7 +420,7 @@
           "clusterSpec": {
             "value": "[variables('clusterSpec')]"
           },
-          "tagName": {
+          "applicationName": {
               "value": "[parameters('applicationName')]"
           }
         }
