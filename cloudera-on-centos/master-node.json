@@ -31,6 +31,9 @@
     },
     "clusterSpec": {
       "type": "object"
+    },
+    "tagName": {
+      "type": "string"
     }
   },
   "variables": {
@@ -45,6 +48,9 @@
   "resources": [
     {
       "apiVersion": "[parameters('resourceAPIVersion')]",
+      "tags": {
+          "Application": "[parameters('tagName')]"
+      },
       "type": "Microsoft.Network/networkSecurityGroups",
       "name": "[variables('securityGroupName')]",
       "location": "[parameters('location')]",
@@ -239,6 +245,9 @@
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[concat(variables('storageAccountName'), copyIndex())]",
       "apiVersion": "[parameters('resourceAPIVersion')]",
+      "tags": {
+          "Application": "[parameters('tagName')]"
+      },
       "location": "[parameters('location')]",
       "copy": {
         "name": "storageAccountLoop",
@@ -250,6 +259,9 @@
     },
     {
       "apiVersion": "[parameters('resourceAPIVersion')]",
+      "tags": {
+          "Application": "[parameters('tagName')]"
+      },
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[concat(variables('publicIPAddressName'), copyIndex())]",
       "location": "[parameters('location')]",
@@ -266,6 +278,9 @@
     },
     {
       "apiVersion": "[parameters('resourceAPIVersion')]",
+      "tags": {
+          "Application": "[parameters('tagName')]"
+      },
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[concat(variables('nicName'), copyIndex())]",
       "location": "[parameters('location')]",
@@ -300,6 +315,9 @@
     },
     {
       "apiVersion": "[parameters('resourceAPIVersion')]",
+      "tags": {
+          "Application": "[parameters('tagName')]"
+      },
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(variables('vmName'), copyIndex())]",
       "plan": {
@@ -393,32 +411,6 @@
               "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('nicName'), copyIndex()))]"
             }
           ]
-        }
-      }
-    },
-    {
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(variables('vmName'), copyIndex(), '/prepareDisks')]",
-      "apiVersion": "[parameters('resourceAPIVersion')]",
-      "location": "[parameters('location')]",
-      "copy": {
-        "name": "nameNodeNicLoop",
-        "count": "[parameters('vmCount')]"
-      },
-      "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), copyIndex())]"
-      ],
-      "properties": {
-        "publisher": "Microsoft.OSTCExtensions",
-        "type": "CustomScriptForLinux",
-        "typeHandlerVersion": "1.4",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "fileUris": [
-            "[concat(parameters('scriptsUri'), '/scripts/prepare-masternode-disks.sh')]",
-            "[concat(parameters('scriptsUri'), '/scripts/initialize-node.sh')]"
-          ],
-          "commandToExecute": "[concat('sh initialize-node.sh \"', variables('masterIP'), '\" \"', variables('workerIP'), '\" \"', parameters('dnsNamePrefix'), '\" \"', reference(concat(variables('publicIPAddressName'), copyIndex())).dnsSettings.fqdn, '\" ', parameters('clusterSpec').masterNodeCount, ' ', parameters('clusterSpec').dataNodeCount, ' \"', parameters('vmSpec').adminUserName, '\" ', 'masternode', ' >> /home/$ADMINUSER/initialize-datanode.log 2>&1')]"
         }
       }
     }
