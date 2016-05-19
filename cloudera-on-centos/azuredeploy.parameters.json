@@ -3,31 +3,37 @@
   "contentVersion": "1.0.0.1",
   "parameters": {
     "storageAccountPrefix": {
-      "value": "GEN-UNIQUE-10"
+      "value": "wandiscocdh"
     },
     "adminPassword": {
-      "value": "GEN-PASSWORD"
+      "value": "WANDiscoPOC08!"
     },
     "cmPassword": {
-      "value": "GEN-PASSWORD"
+      "value": "WANDiscoPOC08!"
     },
     "numberOfDataNodes": {
-      "value": 3
+      "value": 5
     },
     "dnsNamePrefix": {
-      "value": "GEN-UNIQUE-10"
+      "value": "wandiscocdh"
     },
     "location": {
-      "value": "eastus"
+      "value": "eastus2"
     },
     "storageAccountType": {
       "value": "Premium_LRS"
     },
     "virtualNetworkName": {
-      "value": "GEN-UNIQUE-10"
+      "value": "AZ-VN-NA-EAST_US_2-Intranet-02"
+    },
+    "vnetNewOrExisting": {
+      "value": "existing"
+    },
+    "virtualNetworkRGName": {
+      "value": "AZ-NA-EASTUS2-Network"
     },
     "subnetName": {
-      "value": "GEN-UNIQUE-10"
+      "value": "AZ-VN-NA-EAST_US_2-Intranet-02-SN-Use-01"
     },
     "tshirtSize": {
       "value": "Eval"
@@ -36,25 +42,37 @@
       "value": "Standard_DS14"
     },
     "company": {
-      "value": "Company"
+      "value": "PandG"
     },
     "emailAddress": {
-      "value": "email@yourcompany.com"
+      "value": "staniszewski.j@pg.com"
     },
     "businessPhone": {
       "value": "123456789"
     },
     "firstName": {
-      "value": "FirstName"
+      "value": "Kuba"
     },
     "lastName": {
-      "value": "LastName"
+      "value": "Staniszewski"
     },
     "jobRole": {
       "value": "Administrator"
     },
     "jobFunction": {
       "value": "Storage"
+    },
+    "applicationName": {
+      "value": "wandiscocdh"
+    },
+    "addressPrefix": {
+      "value": "137.185.232.0/23"
+    },
+    "subnetPrefix": {
+      "value": "137.185.232.0/23"
+    },
+    "masterNodeIPAddress": {
+      "value": "137.185.232.140"
     }
   }
 }
